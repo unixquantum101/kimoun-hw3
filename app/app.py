@@ -12,7 +12,7 @@ BUILD_NUMBER = os.environ.get("BUILD_NUMBER", "0")
 
 # ---- edit these between releases so every version looks different ---------
 THEME_COLOR = "#0b7285"
-BANNER = ""          # e.g. "New in this release: ..."
+BANNER = "New in 1.1.0: release banner"          # e.g. "New in this release: ..."
 
 
 @app.route("/")
