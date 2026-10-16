@@ -1,0 +1,11 @@
+# secrets
+*.pem
+*.key
+.env
+.aws/
+# build artifacts
+__pycache__/
+*.pyc
+.venv/
+*.log
+.DS_Store

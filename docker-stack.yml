@@ -1,0 +1,42 @@
+# Deployed / updated by Jenkins on the Swarm manager:
+#   IMAGE=<account>.dkr.ecr.<region>.amazonaws.com/<repo>:<vX.Y.Z> \
+#   docker stack deploy --with-registry-auth -c docker-stack.yml hw3
+#
+# Published on 8080 so it can run next to the Homework 2 stack (port 80).
+
+version: "3.8"
+
+services:
+  web:
+    image: ${IMAGE}
+    ports:
+      - "8080:5000"
+    networks:
+      - appnet
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 30s
+      update_config:            # also governs rollbacks: `service update --image`
+        parallelism: 1          # one replica at a time
+        delay: 10s
+        order: start-first      # new task up before the old one stops -> no downtime
+        failure_action: rollback
+        monitor: 15s
+      rollback_config:
+        parallelism: 1
+        order: stop-first
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 256M
+        reservations:
+          cpus: "0.10"
+          memory: 64M
+
+networks:
+  appnet:
+    driver: overlay
