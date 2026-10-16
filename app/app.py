@@ -11,8 +11,8 @@ GIT_SHA = os.environ.get("GIT_SHA", "unknown")
 BUILD_NUMBER = os.environ.get("BUILD_NUMBER", "0")
 
 # ---- edit these between releases so every version looks different ---------
-THEME_COLOR = "#0b7285"
-BANNER = "New in 1.1.0: release banner"          # e.g. "New in this release: ..."
+THEME_COLOR = "#c92a2a"
+BANNER = "v1.3.0 - known issue: this release is the bad one"          # e.g. "New in this release: ..."
 
 
 @app.route("/")
