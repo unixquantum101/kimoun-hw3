@@ -46,6 +46,6 @@ Publish the GitHub Release notes: repo → **Releases** → **Draft a new releas
 3. The pipeline confirms that `v1.1.0` already exists in ECR, then runs
    `docker service update --image <ecr>/hw3-flask-app:v1.1.0 hw3_web` on the manager.
    Swarm replaces the replicas one at a time (`update_config`: `parallelism: 1`, `order: start-first`), so the service stays reachable.
-4. Verify: open `http://<manager-ip>:8080`, or `curl http://<manager-ip>:8080/health` and check `"version"`.
+4. Verify: open `http://18.143.120.217:8080`, or `curl http://18.143.120.217:8080/health` and check `"version"`.
 
-To prove there is no downtime, run `scripts/uptime-check.sh http://<manager-ip>:8080` on your laptop during the rollback: every line stays `HTTP 200`.
+To prove there is no downtime, run `scripts/uptime-check.sh http://18.143.120.217:8080` on your laptop during the rollback: every line stays `HTTP 200`.

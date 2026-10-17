@@ -1,9 +1,9 @@
 # Homework 3 — Release Management: GitHub Tags & Jenkins Build / Push / Deploy / Rollback
 
-**Name:** _YOUR NAME_
-**GitHub repository:** https://github.com/unixquantum101/_REPO-NAME_
-**ECR repository:** `_ACCOUNT_ID_.dkr.ecr._REGION_.amazonaws.com/hw3-flask-app` (private, immutable tags, region `_REGION_`)
-**Live deployment:** http://_MANAGER_PUBLIC_IP_:8080 — currently running **_vX.Y.Z_**
+**Name:** SENG Kimoun
+**GitHub repository:** https://github.com/unixquantum101/kimoun-hw3.git
+**ECR repository:** `780603797333.dkr.ecr.ap-southeast-1.amazonaws.com/hw3-flask-app` (private, immutable tags, region `ap-southeast-1`)
+**Live deployment:** http://18.143.120.217:8080 and http://52.221.163.83:8080 — currently running **v1.3.0**
 
 ## 1. What this project is
 
@@ -43,9 +43,9 @@ Details are in [RELEASING.md](RELEASING.md).
 |---|---|
 | `v1.0.0` | _first release_ |
 | `v1.1.0` | _new feature_ |
-| `v1.2.0` | _third release (the one rolled back)_ |
+| `v1.2.0` | _second release (the one rolled back)_ |
+| `v1.3.0` | _third release (the one rolled back)_ |
 
-_(edit to match your real tags)_
 
 ## 4. How the pipeline works
 
@@ -69,9 +69,9 @@ Swarm starts the replacement task before stopping the old one, one replica at a 
 
 ## 5. Jenkins & AWS setup (summary)
 
-- Jenkins on local Ubuntu 24.04, public via ngrok `https://_NGROK-URL_`; plugins: Git, Pipeline, Credentials Binding, **Generic Webhook Trigger**.
+- Jenkins on local Ubuntu 24.04, public via ngrok `https://stank-level-cocoa.ngrok-free.dev`; plugins: Git, Pipeline, Credentials Binding, **Generic Webhook Trigger**.
 - Credentials: `aws-ecr-creds` (IAM user limited to ECR), `swarm-manager-ssh` (SSH key for the manager).
-- GitHub webhook: `https://_NGROK-URL_/generic-webhook-trigger/invoke?token=hw3-release`, `application/json`, *Just the push event*.
+- GitHub webhook: `https://stank-level-cocoa.ngrok-free.dev/generic-webhook-trigger/invoke?token=hw3-release`, `application/json`, *Just the push event*.
 - ECR repo `hw3-flask-app` with **tag immutability = Immutable**.
 - Swarm: 1 manager + 1 worker (`docker node ls` → both Ready). Security group: 22 from my IP, 8080 public, 2377/7946/4789 inside the group only.
 
@@ -79,7 +79,7 @@ Swarm starts the replacement task before stopping the old one, one replica at a 
 
 1. **Release:** `git tag -a v1.x.0 -m "..." && git push origin v1.x.0` → a build starts by itself and all stages go green.
 2. **ECR:** several tags (`v1.0.0`, `v1.1.0`, …) are listed and none was overwritten.
-3. **Running version:** `curl http://_MANAGER_PUBLIC_IP_:8080/health` shows the version in `"version"`.
+3. **Running version:** `curl http://18.143.120.217:8080/health` shows the version in `"version"`.
 4. **Rollback:** run the job with `ACTION=rollback`, `VERSION=<older tag>`; `/health` now shows the older version and `scripts/uptime-check.sh` showed only `HTTP 200`.
 
 ## 7. Deployment history
