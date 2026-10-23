@@ -3,7 +3,7 @@
 **Name:** SENG Kimoun
 **GitHub repository:** https://github.com/unixquantum101/kimoun-hw3.git
 **ECR repository:** `780603797333.dkr.ecr.ap-southeast-1.amazonaws.com/hw3-flask-app` (private, immutable tags, region `ap-southeast-1`)
-**Live deployment:** http://18.143.120.217:8080 and http://52.221.163.83:8080 — currently running **v1.3.0**
+**Live deployment:** http://18.143.120.217:8080 and http://52.221.163.83:8080 — currently running **v1.2.0**
 
 ## 1. What this project is
 
@@ -88,12 +88,12 @@ Appended automatically by the pipeline to `/home/ubuntu/deploy-history.log` on t
 
 | Time (UTC) | Action | Version | Jenkins build |
 |---|---|---|---|
-| _paste from `cat ~/deploy-history.log`_ | release | v1.0.0 | #_ |
-| | release | v1.1.0 | #_ |
-| | release | v1.2.0 | #_ |
-| | **rollback** | v1.1.0 | #_ |
+| 2026-10-23T13:59:51Z| release | v1.0.0 | jenkins build #3 |
+| 2026-10-23T14:06:22Z| release | v1.1.0 | jenkins build #4 |
+| 2026-10-23T14:18:10Z| release | v1.2.0 | jenkins build #7 |
+| 2026-10-23T14:26:38Z| **rollback** | v1.1.0 | jenkins build #9 |
 
-Version running at submission time: **_vX.Y.Z_**
+Version running at submission time: **_v1.2.0_**
 
 ## 8. Screenshots
 
